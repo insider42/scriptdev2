@@ -24,64 +24,80 @@ EndScriptData */
 #include "precompiled.h"
 #include "trial_of_the_crusader.h"
 
-#define GOSSIP_START_EVENT1 "Yes! We are ready to face the challenges ahead."
+#define BEASTS          1001
+#define JARAXXUS        1002
+#define CHAMPIONS       1003
+#define TWINS           1004
+#define ANUBARAK        1005
+#define COMPLETED       1006
 
-enum
+bool GossipHello_npc_crusader_announcer(Player *player, Creature *creature)
 {
-    NPC_GORMOK   = 34796,
-    NPC_JARAXXUS = 34780
-};
+    ScriptedInstance *pInstance = (ScriptedInstance *) creature->GetInstanceData();
+    if(!pInstance)
+        return true;
+    if(pInstance->IsEncounterInProgress())
+        return true;
+    Difficulty diff = creature->GetMap()->GetDifficulty();
 
-/*######
-## npc_crusader_anouncer
-######*/
+    if(diff!=RAID_DIFFICULTY_10MAN_NORMAL && diff!=RAID_DIFFICULTY_25MAN_NORMAL)
+        return true;
 
-struct MANGOS_DLL_DECL npc_crusader_anouncerAI : public ScriptedAI
-{
-    npc_crusader_anouncerAI(Creature* pCreature) : ScriptedAI(pCreature) {Reset();}
+    if(pInstance->GetData(TYPE_NORTHREND_BEASTS) != DONE)
+        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Northrend Beasts", GOSSIP_SENDER_MAIN, BEASTS);
+    else if(pInstance->GetData(TYPE_JARAXXUS) != DONE)
+        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Lord Jaraxxus", GOSSIP_SENDER_MAIN, JARAXXUS);
+    else if(pInstance->GetData(TYPE_FACTION_CHAMPIONS) != DONE)
+        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Faction Champions", GOSSIP_SENDER_MAIN, CHAMPIONS);
+    else if(pInstance->GetData(TYPE_TWIN_VALKYR) != DONE)
+        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Twin Val'kyr", GOSSIP_SENDER_MAIN, TWINS);
+    else
+        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Anub'arak", GOSSIP_SENDER_MAIN, ANUBARAK);
 
-    ScriptedInstance* m_pInstance;
 
-    void Reset() {}
-
-    void StartEvent(Player* pPlayer)
-    {
-        // code starting the event here
-    }
-};
-
-bool GossipHello_npc_crusader_anouncer(Player* pPlayer, Creature* pCreature)
-{
-    pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, GOSSIP_START_EVENT1, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+1);
-    pPlayer->SEND_GOSSIP_MENU(pPlayer->GetGossipTextId(pCreature), pCreature->GetGUID());
-    return true;
-}
-
-bool GossipSelect_npc_crusader_anouncer(Player* pPlayer, Creature* pCreature, uint32 uiSender, uint32 uiAction)
-{
-    if (uiAction == GOSSIP_ACTION_INFO_DEF+1)
-    {
-        pPlayer->CLOSE_GOSSIP_MENU();
-        if (npc_crusader_anouncerAI* pCrusaderAnnouncerAI = dynamic_cast<npc_crusader_anouncerAI*>(pCreature->AI()))
-            pCrusaderAnnouncerAI->StartEvent(pPlayer);
-    }
+    player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
 
     return true;
 }
 
-CreatureAI* GetAI_npc_crusader_anouncer(Creature* pCreature)
+bool GossipSelect_npc_crusader_announcer(Player *player, Creature *creature, uint32 sender, uint32 action)
 {
-    return new npc_crusader_anouncerAI(pCreature);
+    if(sender != GOSSIP_SENDER_MAIN)
+        return true;
+    ScriptedInstance *pInstance = (ScriptedInstance *) creature->GetInstanceData();
+    if(!pInstance)
+        return true;
+
+    switch(action)
+    {
+    case BEASTS:
+        pInstance->SetData(TYPE_NORTHREND_BEASTS, IN_PROGRESS);
+        break;
+    case JARAXXUS:
+        pInstance->SetData(TYPE_JARAXXUS, IN_PROGRESS);
+        break;
+    case CHAMPIONS:
+        pInstance->SetData(DATA_PLAYER_TEAM, player->GetTeam());
+        pInstance->SetData(TYPE_FACTION_CHAMPIONS, IN_PROGRESS);
+        break;
+    case TWINS:
+        pInstance->SetData(TYPE_TWIN_VALKYR, IN_PROGRESS);
+        break;
+    case ANUBARAK:
+        player->NearTeleportTo(564.0f, 132.0f, 380.0f, 0.0f);
+        break;
+    }
+
+    player->CLOSE_GOSSIP_MENU();
+    return true;
 }
 
-void AddSC_trial_of_the_crusader()
+void AddSC_npc_crusader_announcer()
 {
-    Script* newscript;
-
+    Script *newscript;
     newscript = new Script;
-    newscript->Name = "npc_crusader_anouncer";
-    newscript->GetAI = &GetAI_npc_crusader_anouncer;
-    newscript->pGossipHello = &GossipHello_npc_crusader_anouncer;
-    newscript->pGossipSelect = &GossipSelect_npc_crusader_anouncer;
+    newscript->Name = "npc_crusader_announcer";
+    newscript->pGossipHello = &GossipHello_npc_crusader_announcer;
+    newscript->pGossipSelect = &GossipSelect_npc_crusader_announcer;
     newscript->RegisterSelf();
 }
