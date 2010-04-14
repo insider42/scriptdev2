@@ -38,7 +38,7 @@ struct MANGOS_DLL_DECL boss_faction_championAI : public ScriptedAI
         pInstance = (ScriptedInstance *) pCreature->GetInstanceData();
         m_bIsRegularMode = pCreature->GetMap()->IsRegularDifficulty();
         mAIType = aitype;
-        Reset();
+        Init();
     }
     
     ScriptedInstance *pInstance;
@@ -48,7 +48,7 @@ struct MANGOS_DLL_DECL boss_faction_championAI : public ScriptedAI
     uint32 ThreatTimer;
     uint32 CCTimer;
 
-    void Reset()
+    void Init()
     {
         CCTimer = rand()%10000;
         ThreatTimer = 5000;
@@ -62,7 +62,7 @@ struct MANGOS_DLL_DECL boss_faction_championAI : public ScriptedAI
         return dist_mod * 30000.0f / eh;
     }
     
-    void UpdateThreat()
+    /*void UpdateThreat()
     {
         ThreatList const& tList = m_creature->getThreatManager().getThreatList();
         ThreatList::const_iterator itr;
@@ -83,7 +83,7 @@ struct MANGOS_DLL_DECL boss_faction_championAI : public ScriptedAI
         }
         if(empty)
             EnterEvadeMode();
-    }
+    }*/
 
     void UpdatePower()
     {
@@ -116,7 +116,7 @@ struct MANGOS_DLL_DECL boss_faction_championAI : public ScriptedAI
             pInstance->SetData(TYPE_FACTION_CHAMPIONS, 5);
     }
     
-    void JustReachedHome()
+    void Reset()
     {
         if(pInstance)
             pInstance->SetData(TYPE_FACTION_CHAMPIONS, NOT_STARTED);
@@ -184,7 +184,7 @@ struct MANGOS_DLL_DECL boss_faction_championAI : public ScriptedAI
         if(ThreatTimer < uiDiff)
         {
             UpdatePower();
-            UpdateThreat();
+            //UpdateThreat();
             ThreatTimer = 4000;
         }
         else
@@ -223,17 +223,14 @@ struct MANGOS_DLL_DECL boss_faction_championAI : public ScriptedAI
 
 struct MANGOS_DLL_DECL boss_fc_resto_druidAI : public boss_faction_championAI
 {
-    boss_fc_resto_druidAI(Creature *pCreature) : boss_faction_championAI(pCreature, AI_HEALER)
-    {
-        Reset();
-    }
+    boss_fc_resto_druidAI(Creature *pCreature) : boss_faction_championAI(pCreature, AI_HEALER) {Init();}
     
     uint32 GCDTimer;
     uint32 GraspTimer;
     uint32 TranquilityTimer;
     uint32 BarkSkinTimer;
     
-    void Reset()
+    void Init()
     {
         GCDTimer = 2500;
         BarkSkinTimer = 3000;
@@ -323,16 +320,13 @@ struct MANGOS_DLL_DECL boss_fc_resto_druidAI : public boss_faction_championAI
 
 struct MANGOS_DLL_DECL boss_fc_resto_shammyAI : public boss_faction_championAI
 {
-    boss_fc_resto_shammyAI(Creature *pCreature) : boss_faction_championAI(pCreature, AI_HEALER)
-    {
-        Reset();
-    }
+    boss_fc_resto_shammyAI(Creature *pCreature) : boss_faction_championAI(pCreature, AI_HEALER) {Init();}
     
     uint32 HeroTimer;
     uint32 HexTimer;
     uint32 GCDTimer;
     
-    void Reset()
+    void Init()
     {
         HeroTimer = 30000 + rand()%30000;
         HexTimer = 10000 + rand()%30000;
@@ -410,10 +404,7 @@ struct MANGOS_DLL_DECL boss_fc_resto_shammyAI : public boss_faction_championAI
 
 struct MANGOS_DLL_DECL boss_fc_holy_pallyAI : public boss_faction_championAI
 {
-    boss_fc_holy_pallyAI(Creature *pCreature) : boss_faction_championAI(pCreature, AI_HEALER)
-    {
-        Reset();
-    }
+    boss_fc_holy_pallyAI(Creature *pCreature) : boss_faction_championAI(pCreature, AI_HEALER) {Init();}
     
     bool BubbleUsed;
     bool ProtectionUsed;
@@ -422,7 +413,7 @@ struct MANGOS_DLL_DECL boss_fc_holy_pallyAI : public boss_faction_championAI
     uint32 ShockTimer;
     uint32 HammerOfJusticeTimer;
     
-    void Reset()
+    void Init()
     {
         GCDTimer = 3000;
         ShockTimer = 6000 + rand()%4000;
@@ -533,15 +524,12 @@ struct MANGOS_DLL_DECL boss_fc_holy_pallyAI : public boss_faction_championAI
 
 struct MANGOS_DLL_DECL boss_fc_holy_priestAI : public boss_faction_championAI
 {
-    boss_fc_holy_priestAI(Creature *pCreature) : boss_faction_championAI(pCreature, AI_HEALER)
-    {
-        Reset();
-    }
+    boss_fc_holy_priestAI(Creature *pCreature) : boss_faction_championAI(pCreature, AI_HEALER) {Init();}
     
     uint32 GCDTimer;
     uint32 ScreamTimer;
     
-    void Reset()
+    void Init()
     {
         GCDTimer = 2500;
         ScreamTimer = 5000;
@@ -618,10 +606,7 @@ struct MANGOS_DLL_DECL boss_fc_holy_priestAI : public boss_faction_championAI
 
 struct MANGOS_DLL_DECL boss_fc_shadow_priestAI : public boss_faction_championAI
 {
-    boss_fc_shadow_priestAI(Creature *pCreature) : boss_faction_championAI(pCreature, AI_RANGED)
-    {
-        Reset();
-    }
+    boss_fc_shadow_priestAI(Creature *pCreature) : boss_faction_championAI(pCreature, AI_RANGED) {Init();}
     
     uint32 SilenceTimer;
     uint32 PsychicScreamTimer;
@@ -629,7 +614,7 @@ struct MANGOS_DLL_DECL boss_fc_shadow_priestAI : public boss_faction_championAI
     uint32 GCDTimer;
     uint32 DispersionTimer;
     
-    void Reset()
+    void Init()
     {
         SilenceTimer = 15000;
         PsychicScreamTimer = 8000;
@@ -739,17 +724,14 @@ struct MANGOS_DLL_DECL boss_fc_shadow_priestAI : public boss_faction_championAI
 
 struct MANGOS_DLL_DECL boss_fc_warlockAI : public boss_faction_championAI
 {
-    boss_fc_warlockAI(Creature *pCreature) : boss_faction_championAI(pCreature, AI_RANGED)
-    {
-        Reset();
-    }
+    boss_fc_warlockAI(Creature *pCreature) : boss_faction_championAI(pCreature, AI_RANGED) {Init();}
     
     uint32 FearTimer;
     uint32 UnstableAfflictionTimer;
     uint32 HellfireTimer;
     uint32 GCDTimer;
 
-    void Reset()
+    void Init()
     {
         FearTimer = 4000+rand()%1000;
         UnstableAfflictionTimer = 2000+rand()%1000;
@@ -841,10 +823,7 @@ struct MANGOS_DLL_DECL boss_fc_warlockAI : public boss_faction_championAI
 
 struct MANGOS_DLL_DECL boss_fc_mageAI : public boss_faction_championAI
 {
-    boss_fc_mageAI(Creature *pCreature) : boss_faction_championAI(pCreature, AI_RANGED)
-    {
-        Reset();
-    }
+    boss_fc_mageAI(Creature *pCreature) : boss_faction_championAI(pCreature, AI_RANGED) {Init();}
     
     uint32 ArcaneBarrageTimer;
     uint32 BlinkTimer;
@@ -854,7 +833,7 @@ struct MANGOS_DLL_DECL boss_fc_mageAI : public boss_faction_championAI
     uint32 PolymorphTimer;
     uint32 GCDTimer;
 
-    void Reset()
+    void Init()
     {
         ArcaneBarrageTimer = 2000+rand()%1000;
         BlinkTimer =  8000+rand()%1000;
@@ -947,10 +926,7 @@ struct MANGOS_DLL_DECL boss_fc_mageAI : public boss_faction_championAI
 
 struct MANGOS_DLL_DECL boss_fc_hunterAI : public boss_faction_championAI
 {
-    boss_fc_hunterAI(Creature *pCreature) : boss_faction_championAI(pCreature, AI_RANGED)
-    {
-        Reset();
-    }
+    boss_fc_hunterAI(Creature *pCreature) : boss_faction_championAI(pCreature, AI_RANGED) {Init();}
     
     uint32 AimedShotTimer;
     uint32 CallPetTimer;
@@ -964,7 +940,7 @@ struct MANGOS_DLL_DECL boss_fc_hunterAI : public boss_faction_championAI
     uint32 WyvernStingTimer;
     uint32 GCDTimer;
 
-    void Reset()
+    void Init()
     {
         AimedShotTimer = 1000+rand()%2000;
         DeterrenceTimer = 20000;
@@ -1019,7 +995,7 @@ struct MANGOS_DLL_DECL boss_fc_hunterAI : public boss_faction_championAI
 
         if(FrostTrapTimer < uiDiff)
         {
-            if (DoCastSpellIfCan(m_creature, SP_Frost_Trap) == CAST_OK)
+            //if (DoCastSpellIfCan(m_creature, SP_Frost_Trap) == CAST_OK) // disabled, because of core bug
                 FrostTrapTimer = 30000 + rand()%1000;
         }
         else
@@ -1072,10 +1048,7 @@ struct MANGOS_DLL_DECL boss_fc_hunterAI : public boss_faction_championAI
 
 struct MANGOS_DLL_DECL boss_fc_boomkinAI : public boss_faction_championAI
 {
-    boss_fc_boomkinAI(Creature *pCreature) : boss_faction_championAI(pCreature, AI_RANGED)
-    {
-        Reset();
-    }
+    boss_fc_boomkinAI(Creature *pCreature) : boss_faction_championAI(pCreature, AI_RANGED) {Init();}
     
     uint32 BarkskinTimer;
     uint32 CycloneTimer;
@@ -1084,7 +1057,7 @@ struct MANGOS_DLL_DECL boss_fc_boomkinAI : public boss_faction_championAI
     uint32 FaerieFireTimer;
     uint32 GCDTimer;
     
-    void Reset()
+    void Init()
     {
         BarkskinTimer = 6000;
         CycloneTimer = 5000;
@@ -1183,10 +1156,7 @@ struct MANGOS_DLL_DECL boss_fc_boomkinAI : public boss_faction_championAI
 
 struct MANGOS_DLL_DECL boss_fc_warriorAI : public boss_faction_championAI
 {
-    boss_fc_warriorAI(Creature *pCreature) : boss_faction_championAI(pCreature, AI_MELEE)
-    {
-        Reset();
-    }
+    boss_fc_warriorAI(Creature *pCreature) : boss_faction_championAI(pCreature, AI_MELEE) {Init();}
     
     uint32 BladestormTimer;
     uint32 FearTimer;
@@ -1197,7 +1167,7 @@ struct MANGOS_DLL_DECL boss_fc_warriorAI : public boss_faction_championAI
     uint32 ShatteringThrowTimer;
     uint32 DisarmTimer;
     
-    void Reset()
+    void Init()
     {
         BladestormTimer = 20000 + rand()%10000;
         FearTimer = 10000 + rand()%10000;
@@ -1300,10 +1270,7 @@ struct MANGOS_DLL_DECL boss_fc_warriorAI : public boss_faction_championAI
 
 struct MANGOS_DLL_DECL boss_fc_deathknightAI : public boss_faction_championAI
 {
-    boss_fc_deathknightAI(Creature *pCreature) : boss_faction_championAI(pCreature, AI_MELEE)
-    {
-        Reset();
-    }
+    boss_fc_deathknightAI(Creature *pCreature) : boss_faction_championAI(pCreature, AI_MELEE) {Init();}
     
     uint32 ChainsOfIceTimer;
     uint32 DeathCoilTimer;
@@ -1313,7 +1280,7 @@ struct MANGOS_DLL_DECL boss_fc_deathknightAI : public boss_faction_championAI
     uint32 IcyTouchTimer;
     uint32 StrangulateTimer;
 
-    void Reset()
+    void Init()
     {
         ChainsOfIceTimer = 2000+rand()%3000;
         DeathCoilTimer = 3000+rand()%4000;
@@ -1411,10 +1378,7 @@ struct MANGOS_DLL_DECL boss_fc_deathknightAI : public boss_faction_championAI
 
 struct MANGOS_DLL_DECL boss_fc_rogueAI : public boss_faction_championAI
 {
-    boss_fc_rogueAI(Creature *pCreature) : boss_faction_championAI(pCreature, AI_MELEE)
-    {
-        Reset();
-    }
+    boss_fc_rogueAI(Creature *pCreature) : boss_faction_championAI(pCreature, AI_MELEE) {Init();}
     
     uint32 FanOfKnivesTimer;
     uint32 BlindTimer;
@@ -1424,7 +1388,7 @@ struct MANGOS_DLL_DECL boss_fc_rogueAI : public boss_faction_championAI
     uint32 HemorrhageTimer;
     uint32 EviscerateTimer;
 
-    void Reset()
+    void Init()
     {
         FanOfKnivesTimer = 7000 + rand()%1000;
         BlindTimer = 6000 + rand()%3000;
@@ -1528,17 +1492,14 @@ struct MANGOS_DLL_DECL boss_fc_rogueAI : public boss_faction_championAI
 
 struct MANGOS_DLL_DECL boss_fc_enh_shammyAI : public boss_faction_championAI
 {
-    boss_fc_enh_shammyAI(Creature *pCreature) : boss_faction_championAI(pCreature, AI_MELEE)
-    {
-        Reset();
-    }
+    boss_fc_enh_shammyAI(Creature *pCreature) : boss_faction_championAI(pCreature, AI_MELEE) {Init();}
     
     uint32 HeroismTimer;
     uint32 ShockTimer;
     uint32 LavaLashTimer;
     uint32 StormstrikeTimer;
 
-    void Reset()
+    void Init()
     {
         ShockTimer=3000+rand()%2000;       
         LavaLashTimer=4000+rand()%2000;
@@ -1602,10 +1563,7 @@ struct MANGOS_DLL_DECL boss_fc_enh_shammyAI : public boss_faction_championAI
 
 struct MANGOS_DLL_DECL boss_fc_ret_pallyAI : public boss_faction_championAI
 {
-    boss_fc_ret_pallyAI(Creature *pCreature) : boss_faction_championAI(pCreature, AI_MELEE)
-    {
-        Reset();
-    }
+    boss_fc_ret_pallyAI(Creature *pCreature) : boss_faction_championAI(pCreature, AI_MELEE) {Init();}
     
     bool ShieldUsed;
     uint32 AvengingWrathTimer;
@@ -1617,7 +1575,7 @@ struct MANGOS_DLL_DECL boss_fc_ret_pallyAI : public boss_faction_championAI
     uint32 JudgementOfCommandTimer;
     uint32 RepentanceTimer;
 
-    void Reset()
+    void Init()
     {
         AvengingWrathTimer = 7000 + rand()%3000;
         CrusaderStrikeTimer = 4000 + rand()%1000;
