@@ -112,7 +112,7 @@ struct MANGOS_DLL_DECL boss_archavonAI : public ScriptedAI
 
         if (m_uiEvadeCheckCooldown < uiDiff)
         {
-            if (m_creature->GetDistance2d(-36.287f, -101.09f) > 80.0f)
+            if (m_creature->GetDistance2d(140.34f, -102.34f) > 80.0f)
                 EnterEvadeMode();
             m_uiEvadeCheckCooldown = 2000;
         }
