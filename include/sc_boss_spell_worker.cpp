@@ -5,8 +5,6 @@
 #include "sc_boss_spell_worker.h"
 #ifdef DEF_BOSS_SPELL_WORKER_H
 
-//extern DatabaseType SD2Database;
-
 BossSpellWorker::BossSpellWorker(ScriptedAI* bossAI)
 {
      boss = bossAI->m_creature;
