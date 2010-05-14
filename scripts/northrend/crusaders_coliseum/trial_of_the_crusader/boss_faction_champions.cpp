@@ -561,7 +561,7 @@ struct MANGOS_DLL_DECL mob_toc_mageAI : public boss_faction_championsAI
         if(Unit *target = SelectEnemyCaster(false))
             bsw->timedCast(SPELL_Counterspell, diff, target);
 
-        if(m_creature->GetHealthPercent() < 50.0f && EnemiesInRange(10.0f)>3)
+        if(m_creature->GetHealthPercent() < 50.0f && EnemiesInRange(10.0f) > 3)
         {
             bsw->timedCast(SPELL_Frost_Nova, diff);
             bsw->timedCast(SPELL_Blink, diff);

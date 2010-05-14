@@ -41,8 +41,7 @@ struct MANGOS_DLL_DECL instance_trial_of_the_crusader : public ScriptedInstance
 
     uint32 m_uiDataDamageFjola;
     uint32 m_uiDataDamageEydis;
-    uint32 m_uiFjolaCasting;
-    uint32 m_uiEydisCasting;
+    uint32 m_uiValkyrsCasting;
 
     uint32 m_auiCrusadersCount;
 
@@ -332,8 +331,7 @@ struct MANGOS_DLL_DECL instance_trial_of_the_crusader : public ScriptedInstance
         case TYPE_NORTHREND_BEASTS: m_auiNorthrendBeasts = uiData; break;
         case DATA_HEALTH_FJOLA:     m_uiDataDamageFjola = uiData; uiData = NOT_STARTED; break;
         case DATA_HEALTH_EYDIS:     m_uiDataDamageEydis = uiData; uiData = NOT_STARTED; break;
-        case DATA_CASTING_FJOLA:    m_uiFjolaCasting = uiData; uiData = NOT_STARTED; break;
-        case DATA_CASTING_EYDIS:    m_uiEydisCasting = uiData; uiData = NOT_STARTED; break;
+        case DATA_CASTING_VALKYRS:  m_uiValkyrsCasting = uiData; uiData = NOT_STARTED; break;
         }
 
         if (IsEncounterInProgress()) {
@@ -544,8 +542,7 @@ struct MANGOS_DLL_DECL instance_trial_of_the_crusader : public ScriptedInstance
 
         case DATA_HEALTH_FJOLA: return m_uiDataDamageFjola;
         case DATA_HEALTH_EYDIS: return m_uiDataDamageEydis;
-        case DATA_CASTING_FJOLA: return m_uiFjolaCasting;
-        case DATA_CASTING_EYDIS: return m_uiEydisCasting;
+        case DATA_CASTING_VALKYRS: return m_uiValkyrsCasting;
         }
         return 0;
     }

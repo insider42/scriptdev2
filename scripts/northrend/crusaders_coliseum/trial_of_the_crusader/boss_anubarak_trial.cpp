@@ -143,7 +143,8 @@ struct MANGOS_DLL_DECL boss_anubarak_trialAI : public ScriptedAI
                     bsw->doCast(SUMMON_BORROWER);
                     DoScriptText(-1713556,m_creature);
                 };
-                if (bsw->timedQuery(SPELL_SUBMERGE_0, uiDiff)) stage = 1;
+                if (bsw->timedQuery(SPELL_SUBMERGE_0, uiDiff))
+                    stage = 1;
                 break;
             }
             case 1:
