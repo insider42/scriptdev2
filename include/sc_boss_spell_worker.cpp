@@ -603,7 +603,7 @@ Unit* BossSpellWorker::_doSelect(uint32 SpellID, bool spellsearchtype, float ran
     Map::PlayerList const &pList = pMap->GetPlayers();
           if (pList.isEmpty()) return NULL;
 
-    Unit* _list[pMap->GetMaxPlayers()];
+    Unit* _list[40];
 
     uint8 _count = 0;
 
