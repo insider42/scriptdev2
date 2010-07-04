@@ -299,6 +299,8 @@ CanCastResult BossSpellWorker::_BSWSpellSelector(uint8 m_uiSpellIdx, Unit* pTarg
                        pTarget = SelectRandomPlayerAtRange((float)pSpell->LocData.x);
                    if (pTarget && pTarget->IsInMap(boss))
                        return _BSWCastOnTarget(pTarget, m_uiSpellIdx);
+                   else
+                       return CAST_FAIL_OTHER;
                    break;
 
             default:
@@ -350,10 +352,10 @@ uint8 BossSpellWorker::_auraCount(uint8 m_uiSpellIdx, Unit* pTarget, SpellEffect
 
     SpellTable* pSpell = &m_BossSpell[m_uiSpellIdx];
 
-    if (pTarget->GetAura(pSpell->m_uiSpellEntry[currentDifficulty], index)->GetStackAmount() > 0)
-        return pTarget->GetAura(pSpell->m_uiSpellEntry[currentDifficulty], index)->GetStackAmount();
-    else
-        return 0;
+    if (Aura* aura = pTarget->GetAura(pSpell->m_uiSpellEntry[currentDifficulty], index))
+        if (aura->GetStackAmount() > 0)
+            return aura->GetStackAmount();
+    return 0;
 };
 
 uint8 BossSpellWorker::_findSpellIDX(uint32 SpellID)
@@ -461,7 +463,7 @@ Unit* BossSpellWorker::_doSummonAtPosition(uint8 m_uiSpellIdx, TempSummonType su
     return boss->SummonCreature(pSpell->m_uiSpellEntry[currentDifficulty], fPosX, fPosY, fPosZ, 0, summontype, delay);
 };
 
-bool BossSpellWorker::_doRemove(uint8 m_uiSpellIdx, Unit* pTarget, SpellEffectIndex index)
+bool BossSpellWorker::_doRemove(uint8 m_uiSpellIdx, Unit* pTarget, uint8 index)
 {
     SpellTable* pSpell = &m_BossSpell[m_uiSpellIdx];
 
@@ -512,9 +514,15 @@ bool BossSpellWorker::_doRemove(uint8 m_uiSpellIdx, Unit* pTarget, SpellEffectIn
         return false;
     }
 
-    if (_auraCount(m_uiSpellIdx,pTarget,index) > 1)
+    if (index == EFFECT_INDEX_ALL)
     {
-        if (pTarget->GetAura(pSpell->m_uiSpellEntry[currentDifficulty], index)->modStackAmount(-1))
+        pTarget->RemoveAurasDueToSpell(pSpell->m_uiSpellEntry[currentDifficulty]);
+        return true;
+    }
+
+    if (_auraCount(m_uiSpellIdx,pTarget,(SpellEffectIndex)index) > 1)
+    {
+        if (pTarget->GetAura(pSpell->m_uiSpellEntry[currentDifficulty],(SpellEffectIndex)index)->modStackAmount(-1))
             return true;
         else
             return false;
