@@ -36,6 +36,10 @@ base/follower_ai.cpp \
 base/follower_ai.h \
 base/guard_ai.cpp \
 base/guard_ai.h \
+base/BSW_instance.cpp \
+base/BSW_instance.h \
+base/BSW_ai.cpp \
+base/BSW_ai.h \
 include/precompiled.cpp \
 include/precompiled.h \
 include/sc_creature.cpp \
