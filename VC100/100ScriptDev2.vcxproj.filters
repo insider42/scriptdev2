@@ -1323,6 +1323,21 @@
     <ClCompile Include="..\scripts\northrend\utgarde_keep\utgarde_pinnacle\instance_utgarde_pinnacle.cpp">
       <Filter>scripts\northrend\utgarde_keep\utgarde_pinnacle</Filter>
     </ClCompile>
+    <ClCompile Include="..\scripts\northrend\vault_of_archavon\boss_archavon.cpp">
+      <Filter>scripts\northrend\vault_of_archavon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\scripts\northrend\vault_of_archavon\boss_emalon.cpp">
+      <Filter>scripts\northrend\vault_of_archavon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\scripts\northrend\vault_of_archavon\boss_koralon.cpp">
+      <Filter>scripts\northrend\vault_of_archavon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\scripts\northrend\vault_of_archavon\boss_toravon.cpp">
+      <Filter>scripts\northrend\vault_of_archavon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\scripts\northrend\vault_of_archavon\instance_vault_of_archavon.cpp">
+      <Filter>scripts\northrend\vault_of_archavon</Filter>
+    </ClCompile>
     <ClCompile Include="..\scripts\northrend\violet_hold\instance_violet_hold.cpp">
       <Filter>scripts\northrend\violet_hold</Filter>
     </ClCompile>
@@ -1827,6 +1842,9 @@
     <ClInclude Include="..\scripts\northrend\utgarde_keep\utgarde_pinnacle\utgarde_pinnacle.h">
       <Filter>scripts\northrend\utgarde_keep\utgarde_pinnacle</Filter>
     </ClInclude>
+    <ClCompile Include="..\scripts\northrend\vault_of_archavon\vault_of_archavon.h">
+      <Filter>scripts\northrend\vault_of_archavon</Filter>
+    </ClCompile>
     <ClInclude Include="..\scripts\northrend\violet_hold\violet_hold.h">
       <Filter>scripts\northrend\violet_hold</Filter>
     </ClInclude>
