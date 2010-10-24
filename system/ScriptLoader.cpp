@@ -274,6 +274,7 @@ extern void AddSC_boss_krikthir();
 extern void AddSC_instance_azjol_nerub();
 extern void AddSC_boss_anubarak_trial();                    //trial_of_the_crusader
 extern void AddSC_boss_jaraxxus();
+extern void AddSC_boss_faction_champions();
 extern void AddSC_instance_trial_of_the_crusader();
 extern void AddSC_northrend_beasts();
 extern void AddSC_trial_of_the_crusader();
@@ -692,6 +693,7 @@ void AddScripts()
     AddSC_instance_azjol_nerub();
     AddSC_boss_anubarak_trial();                            //trial_of_the_crusader
     AddSC_boss_jaraxxus();
+    AddSC_boss_faction_champions();
     AddSC_instance_trial_of_the_crusader();
     AddSC_northrend_beasts();
     AddSC_trial_of_the_crusader();
