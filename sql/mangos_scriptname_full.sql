@@ -489,6 +489,7 @@ UPDATE creature_template SET ScriptName='npc_torastrasza' WHERE entry=26949;
 UPDATE creature_template SET ScriptName='boss_novos' WHERE entry=26631;
 UPDATE creature_template SET ScriptName='boss_tharonja' WHERE entry=26632;
 UPDATE creature_template SET ScriptName='boss_trollgore' WHERE entry=26630;
+UPDATE instance_template SET ScriptName='instance_draktharon_keep' WHERE map=600;
 
 /* DUN MOROGH */
 UPDATE creature_template SET ScriptName='npc_narm_faulk' WHERE entry=6177;
@@ -579,6 +580,7 @@ UPDATE creature_template SET ScriptName='boss_krosh_firehand' WHERE entry=18832;
 
 /* GUNDRAK */
 UPDATE creature_template SET ScriptName='boss_colossus' WHERE entry=29307;
+UPDATE creature_template SET ScriptName='boss_eck' WHERE entry=29932;
 UPDATE creature_template SET ScriptName='boss_galdarah' WHERE entry=29306;
 UPDATE creature_template SET ScriptName='boss_moorabi' WHERE entry=29305;
 UPDATE creature_template SET ScriptName='boss_sladran' WHERE entry=29304;
