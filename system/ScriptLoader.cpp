@@ -294,6 +294,20 @@ extern void AddSC_boss_galdarah();
 extern void AddSC_boss_moorabi();
 extern void AddSC_boss_sladran();
 extern void AddSC_instance_gundrak();
+extern void AddSC_instance_icecrown_spire();                //IceCrown Citadel
+extern void AddSC_icecrown_spire();
+extern void AddSC_icecrown_teleporter();
+extern void AddSC_boss_lord_marrowgar();
+extern void AddSC_boss_lady_deathwhisper();
+extern void AddSC_boss_deathbringer_saurfang();
+extern void AddSC_boss_rotface();
+extern void AddSC_boss_festergut();
+extern void AddSC_boss_proffesor_putricide();
+extern void AddSC_blood_prince_council();
+extern void AddSC_boss_blood_queen_lanathel();
+extern void AddSC_boss_valithria_dreamwalker();
+extern void AddSC_boss_sindragosa();
+extern void AddSC_boss_lich_king_icc();
 extern void AddSC_boss_bronjahm();                          // ICC, forge_of_souls
 extern void AddSC_boss_devourer_of_souls();
 extern void AddSC_instance_forge_of_souls();
@@ -746,6 +760,20 @@ void AddScripts()
     AddSC_boss_moorabi();
     AddSC_boss_sladran();
     AddSC_instance_gundrak();
+    AddSC_instance_icecrown_spire();                        //IceCrown Citadel
+    AddSC_icecrown_spire();
+    AddSC_icecrown_teleporter();
+    AddSC_boss_lord_marrowgar();
+    AddSC_boss_lady_deathwhisper();
+    AddSC_boss_deathbringer_saurfang();
+    AddSC_boss_rotface();
+    AddSC_boss_festergut();
+    AddSC_boss_proffesor_putricide();
+    AddSC_blood_prince_council();
+    AddSC_boss_blood_queen_lanathel();
+    AddSC_boss_valithria_dreamwalker();
+    AddSC_boss_sindragosa();
+    AddSC_boss_lich_king_icc();
     AddSC_boss_bronjahm();                                  // ICC, forge_of_souls
     AddSC_boss_devourer_of_souls();
     AddSC_instance_forge_of_souls();
