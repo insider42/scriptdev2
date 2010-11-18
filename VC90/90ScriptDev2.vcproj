@@ -2349,6 +2349,10 @@
 								>
 							</File>
 							<File
+								RelativePath="..\scripts\northrend\icecrown_citadel\frozen_halls\forge_of_souls\forge_of_souls.cpp"
+								>
+							</File>
+							<File
 								RelativePath="..\scripts\northrend\icecrown_citadel\frozen_halls\forge_of_souls\forge_of_souls.h"
 								>
 							</File>

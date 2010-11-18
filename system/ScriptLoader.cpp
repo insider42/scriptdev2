@@ -297,6 +297,7 @@ extern void AddSC_instance_gundrak();
 extern void AddSC_boss_bronjahm();                          // ICC, forge_of_souls
 extern void AddSC_boss_devourer_of_souls();
 extern void AddSC_instance_forge_of_souls();
+extern void AddSC_forge_of_souls();
 extern void AddSC_boss_gafrost();                           // ICC, pit_of_saron
 extern void AddSC_boss_krick_and_ick();
 extern void AddSC_boss_tyrannus();
@@ -748,6 +749,7 @@ void AddScripts()
     AddSC_boss_bronjahm();                                  // ICC, forge_of_souls
     AddSC_boss_devourer_of_souls();
     AddSC_instance_forge_of_souls();
+    AddSC_forge_of_souls();
     AddSC_boss_gafrost();                                   // ICC, pit_of_saron
     AddSC_boss_krick_and_ick();
     AddSC_boss_tyrannus();
